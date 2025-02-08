@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../Utils/Vector.h"
+#include "Vector.h"
 
-#include "../upng/upng.h"
+#include "upng.h"
 
 #include <stdint.h>
 #include <SDL.h>

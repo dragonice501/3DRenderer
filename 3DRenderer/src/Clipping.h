@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Vector.h"
-#include "../Objects/Mesh.h"
+#include "Mesh.h"
 
 const int MAX_NUM_POLY_VERTICES = 10;
 const int MAX_NUM_POLY_TRIANGLES = 10;

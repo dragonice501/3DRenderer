@@ -3,6 +3,8 @@
 #include <SDL.h>
 #include <iostream>
 
+Vec2 InputManager::mMouseMovement = Vec2();
+
 bool InputManager::mKeyPressedW = false;
 bool InputManager::mKeyHeldW = false;
 bool InputManager::mKeyReleasedW = false;
@@ -23,6 +25,16 @@ bool InputManager::mKeyHeldD = false;
 bool InputManager::mKeyReleasedD = false;
 float InputManager::mKeyHeldTimeD = 0.0f;
 
+bool InputManager::mKeyPressedE = false;
+bool InputManager::mKeyHeldE = false;
+bool InputManager::mKeyReleasedE = false;
+float InputManager::mKeyHeldTimeE = 0.0f;
+
+bool InputManager::mKeyPressedQ = false;
+bool InputManager::mKeyHeldQ = false;
+bool InputManager::mKeyReleasedQ = false;
+float InputManager::mKeyHeldTimeQ = 0.0f;
+
 bool InputManager::mKeyPressedL = false;
 bool InputManager::mKeyPressedK = false;
 bool InputManager::mKeyPressedO = false;
@@ -41,6 +53,12 @@ bool InputManager::mKeyPressedSix = false;
 
 void InputManager::Update(const float dt)
 {
+    if (mMouseMovement.x != 0.0f || mMouseMovement.y != 0.0f)
+    {
+        mMouseMovement.x = 0.0f;
+        mMouseMovement.y = 0.0f;
+    }
+
     if (mKeyPressedW || mKeyHeldW)
     {
         mKeyPressedW = false;
@@ -77,6 +95,30 @@ void InputManager::Update(const float dt)
         mKeyHeldTimeA = 0.0f;
     }
 
+    if (mKeyPressedE || mKeyHeldE)
+    {
+        mKeyPressedE = false;
+        mKeyHeldE = true;
+        mKeyHeldTimeE += dt;
+    }
+    else if (mKeyReleasedE)
+    {
+        mKeyReleasedE = false;
+        mKeyHeldTimeE = 0.0f;
+    }
+
+    if (mKeyPressedQ || mKeyHeldQ)
+    {
+        mKeyPressedQ = false;
+        mKeyHeldQ = true;
+        mKeyHeldTimeQ += dt;
+    }
+    else if (mKeyReleasedQ)
+    {
+        mKeyReleasedQ = false;
+        mKeyHeldTimeQ = 0.0f;
+    }
+
     if (mKeyPressedD || mKeyHeldD)
     {
         mKeyPressedD = false;
@@ -110,6 +152,12 @@ void InputManager::Update(const float dt)
     {
         switch (sdlEvent.type)
         {
+        case SDL_MOUSEMOTION:
+        {
+            mMouseMovement.x = sdlEvent.motion.xrel;
+            mMouseMovement.y = sdlEvent.motion.yrel;
+            break;
+        }
             case SDL_KEYDOWN:
             {
                 if (sdlEvent.key.keysym.sym == SDLK_ESCAPE)
@@ -152,25 +200,7 @@ void InputManager::Update(const float dt)
                     mKeyPressedSix = true;
                 }
 
-                if (sdlEvent.key.keysym.sym == SDLK_w)
-                {
-                    if (!mKeyPressedW && !mKeyHeldW)
-                    {
-                        mKeyPressedW = true;
-                        mKeyHeldTimeW = 0.0f;
-                    }
-                    break;
-                }
-                else if (sdlEvent.key.keysym.sym == SDLK_s)
-                {
-                    if (!mKeyPressedS && !mKeyHeldS)
-                    {
-                        mKeyPressedS = true;
-                        mKeyHeldTimeS = 0.0f;
-                    }
-                    break;
-                }
-                else if (sdlEvent.key.keysym.sym == SDLK_a)
+                if (sdlEvent.key.keysym.sym == SDLK_a)
                 {
                     if (!mKeyPressedA && !mKeyHeldA)
                     {
@@ -192,8 +222,16 @@ void InputManager::Update(const float dt)
                     }
                     break;
                 }
-
-                if (sdlEvent.key.keysym.sym == SDLK_l)
+                else if (sdlEvent.key.keysym.sym == SDLK_e)
+                {
+                    if (!mKeyPressedE && !mKeyHeldE)
+                    {
+                        mKeyPressedE = true;
+                        mKeyHeldTimeE = 0.0f;
+                    }
+                    break;
+                }
+                else if (sdlEvent.key.keysym.sym == SDLK_l)
                 {
                     mKeyPressedL = true;
                     break;
@@ -206,6 +244,33 @@ void InputManager::Update(const float dt)
                 else if (sdlEvent.key.keysym.sym == SDLK_o)
                 {
                     mKeyPressedO = true;
+                    break;
+                }
+                else if (sdlEvent.key.keysym.sym == SDLK_q)
+                {
+                    if (!mKeyPressedQ && !mKeyHeldQ)
+                    {
+                        mKeyPressedQ = true;
+                        mKeyHeldTimeQ = 0.0f;
+                    }
+                    break;
+                }
+                else if (sdlEvent.key.keysym.sym == SDLK_s)
+                {
+                    if (!mKeyPressedS && !mKeyHeldS)
+                    {
+                        mKeyPressedS = true;
+                        mKeyHeldTimeS = 0.0f;
+                    }
+                    break;
+                }
+                else if (sdlEvent.key.keysym.sym == SDLK_w)
+                {
+                    if (!mKeyPressedW && !mKeyHeldW)
+                    {
+                        mKeyPressedW = true;
+                        mKeyHeldTimeW = 0.0f;
+                    }
                     break;
                 }
                 
@@ -239,6 +304,19 @@ void InputManager::Update(const float dt)
                     mKeyReleasedD = true;
                     mKeyPressedD = false;
                     mKeyHeldD = false;
+                    break;
+                }
+                else if (sdlEvent.key.keysym.sym == SDLK_e)
+                {
+                    mKeyReleasedE = true;
+                    mKeyPressedE = false;
+                    mKeyHeldE = false;
+                    break;
+                }else if (sdlEvent.key.keysym.sym == SDLK_q)
+                {
+                    mKeyReleasedQ = true;
+                    mKeyPressedQ = false;
+                    mKeyHeldQ = false;
                     break;
                 }
                 break;

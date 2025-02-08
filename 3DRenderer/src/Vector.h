@@ -1,5 +1,7 @@
 #pragma once
 
+#include <math.h>
+
 struct Vec2Int
 {
 	int x;
@@ -12,6 +14,23 @@ struct Vec2
 	Vec2(float x, float y) { this->x = x; this->y = y; }
 	float x;
 	float y;
+
+	float Magnitude()
+	{
+		return sqrtf(x * x + y * y);
+	}
+
+	float SqrMagnitude()
+	{
+		return x * x + y * y;
+	}
+
+	void Normalize()
+	{
+		float mag = Magnitude();
+		x /= mag;
+		y /= mag;
+	}
 };
 
 struct Vec3

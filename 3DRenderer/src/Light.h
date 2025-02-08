@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Utils/Vector.h"
+#include "Vector.h"
 
 struct Light
 {

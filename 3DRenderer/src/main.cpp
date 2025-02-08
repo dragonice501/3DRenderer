@@ -1,15 +1,15 @@
-#include "Managers/InputManager.h"
-#include "Managers/GraphicsManager.h"
+#include "InputManager.h"
+#include "GraphicsManager.h"
 
-#include "upng/upng.h"
+#include "upng.h"
 
-#include "Utils/Clipping.h"
-#include "Utils/Mat4.h"
-#include "Utils/Vector.h"
+#include "Clipping.h"
+#include "Mat4.h"
+#include "Vector.h"
 
-#include "Objects/Camera.h"
-#include "Objects/Light.h"
-#include "Objects/Mesh.h"
+#include "Camera.h"
+#include "Light.h"
+#include "Mesh.h"
 
 #include <vector>
 #include <string>
@@ -36,6 +36,9 @@ Light mLight =
 {
 	{ 0.0f, 0.0f, 1.0f }
 };
+
+Vec2 gMoveVector;
+float gTurnSpeed = 5 * (3.14159 / 180);
 
 const int MAX_NUM_MESHES = 10;
 Mesh mMeshes[MAX_NUM_MESHES];
@@ -220,22 +223,53 @@ void Input()
 {
 	InputManager::Update(0.0f);
 
+	gMoveVector.x = gMoveVector.y = 0;
+
+	Vec2 mouse;
+	mouse.x = InputManager::MouseMovement().x;
+	mouse.y = InputManager::MouseMovement().y;
+	if (mouse.x != 0.0f || mouse.y != 0.0f)
+	{
+		mCamera.yaw += mouse.x * gTurnSpeed * mDeltaTime;
+		mCamera.pitch += mouse.y * gTurnSpeed * mDeltaTime;
+	}
+
 	if (InputManager::KeyHeldW())
 	{
-		mCamera.mPosition.y += 3.0f * mDeltaTime;
+		gMoveVector.x += cosf(-mCamera.yaw + 1.57f) * 3.0f * mDeltaTime;
+		gMoveVector.y += sinf(-mCamera.yaw + 1.57f) * 3.0f * mDeltaTime;
 	}
 	else if (InputManager::KeyHeldS())
 	{
-		mCamera.mPosition.y -= 3.0f * mDeltaTime;
+		gMoveVector.x -= cosf(-mCamera.yaw + 1.57f) * 3.0f * mDeltaTime;
+		gMoveVector.y -= sinf(-mCamera.yaw + 1.57f) * 3.0f * mDeltaTime;
 	}
 
 	if (InputManager::KeyHeldD())
 	{
-		mCamera.yaw += 1.0f * mDeltaTime;
+		gMoveVector.x += cosf(-mCamera.yaw) * 3.0f * mDeltaTime;
+		gMoveVector.y += sinf(-mCamera.yaw) * 3.0f * mDeltaTime;
 	}
 	else if (InputManager::KeyHeldA())
 	{
-		mCamera.yaw -= 1.0f * mDeltaTime;
+		gMoveVector.x -= cosf(-mCamera.yaw) * 3.0f * mDeltaTime;
+		gMoveVector.y -= sinf(-mCamera.yaw) * 3.0f * mDeltaTime;
+	}
+
+	if (InputManager::KeyHeldE())
+	{
+		mCamera.mPosition.y += 3.0f * mDeltaTime;
+	}
+	else if (InputManager::KeyHeldQ())
+	{
+		mCamera.mPosition.y -= 3.0f * mDeltaTime;
+	}
+
+	if (gMoveVector.SqrMagnitude() > 0.0f)
+	{
+		gMoveVector.Normalize();
+		mCamera.mPosition.x += gMoveVector.x * 3.0f * mDeltaTime;
+		mCamera.mPosition.z += gMoveVector.y * 3.0f * mDeltaTime;
 	}
 
 	if (InputManager::KeyPressedSpace())

@@ -81,13 +81,13 @@
     <PublicIncludeDirectories>$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\narga\Desktop\Visual Studio Stuff\3DRenderer\3DRenderer\libs\SDL2-2.28.5\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\narga\Desktop\Visual Studio Stuff\3DRenderer\3DRenderer\libs\SDL2-2.28.5\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\narga\Desktop\Programming Stuff\3DRenderer\3DRenderer\libs\SDL2-2.28.5\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\narga\Desktop\Programming Stuff\3DRenderer\3DRenderer\libs\SDL2-2.28.5\lib\x86;$(LibraryPath)</LibraryPath>
     <PublicIncludeDirectories>$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>C:\Users\narga\Desktop\Visual Studio Stuff\3DRenderer\3DRenderer\libs\SDL2-2.28.5\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\narga\Desktop\Visual Studio Stuff\3DRenderer\3DRenderer\libs\SDL2-2.28.5\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\narga\Desktop\Programming Stuff\3DRenderer\3DRenderer\libs\SDL2-2.28.5\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\narga\Desktop\Programming Stuff\3DRenderer\3DRenderer\libs\SDL2-2.28.5\lib\x86;$(LibraryPath)</LibraryPath>
     <PublicIncludeDirectories>$(PublicIncludeDirectories)</PublicIncludeDirectories>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -155,26 +155,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Objects\Texture.cpp" />
-    <ClCompile Include="src\upng\upng.cpp" />
-    <ClCompile Include="src\Utils\Clipping.cpp" />
-    <ClCompile Include="src\Utils\Mat4.cpp" />
+    <ClCompile Include="src\Texture.cpp" />
+    <ClCompile Include="src\upng.cpp" />
+    <ClCompile Include="src\Clipping.cpp" />
+    <ClCompile Include="src\Mat4.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\Managers\GraphicsManager.cpp" />
-    <ClCompile Include="src\Managers\InputManager.cpp" />
-    <ClCompile Include="src\Utils\Vector.cpp" />
+    <ClCompile Include="src\GraphicsManager.cpp" />
+    <ClCompile Include="src\InputManager.cpp" />
+    <ClCompile Include="src\Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Objects\Camera.h" />
-    <ClInclude Include="src\upng\upng.h" />
-    <ClInclude Include="src\Objects\Light.h" />
-    <ClInclude Include="src\Utils\Clipping.h" />
-    <ClInclude Include="src\Utils\Mat4.h" />
-    <ClInclude Include="src\Objects\Mesh.h" />
-    <ClInclude Include="src\Managers\GraphicsManager.h" />
-    <ClInclude Include="src\Managers\InputManager.h" />
-    <ClInclude Include="src\Objects\Texture.h" />
-    <ClInclude Include="src\Utils\Vector.h" />
+    <ClInclude Include="src\Camera.h" />
+    <ClInclude Include="src\upng.h" />
+    <ClInclude Include="src\Light.h" />
+    <ClInclude Include="src\Clipping.h" />
+    <ClInclude Include="src\Mat4.h" />
+    <ClInclude Include="src\Mesh.h" />
+    <ClInclude Include="src\GraphicsManager.h" />
+    <ClInclude Include="src\InputManager.h" />
+    <ClInclude Include="src\Texture.h" />
+    <ClInclude Include="src\Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

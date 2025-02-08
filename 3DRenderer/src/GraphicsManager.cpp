@@ -12,7 +12,7 @@ int GraphicsManager::mWindowWidth = 1920 / 2;
 int GraphicsManager::mWindowHeight = 1080 / 2;
 
 GraphicsManager::ERenderMode GraphicsManager::mRenderMode = GraphicsManager::EWireframe;
-bool GraphicsManager::mBackfaceCulling = true;
+bool GraphicsManager::mBackfaceCulling = false;
 
 bool GraphicsManager::InitializeWindow()
 {
